@@ -1,0 +1,71 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 05
+***************
+
+Steps to Install Docker in AWS Cloud
+==============================
+Step 1: Launch one EC2 Instance
+
+Step 2: Connect to the EC2 Instance using MobaXTerm 
+
+Step 3: 
+# To check whether docker is available or not
+$ docker info
+# You will see 'command not found.' It indicates docker is not installed.
+
+# Swtich to the root user
+$ sudo su
+
+# Update the packages
+$ sudo yum update -y
+
+# Install the docker s/w
+$ sudo yum install docker -y
+
+# Start the docker service
+$ sudo service docker start
+
+# Verify the docker installation
+$ docker info
+# You will not see 'command not found'. But you will see 'permission denied' or 'disabled'
+# The reason is 'ec2-user' doesnt have the permission to work with docker.
+# To resolve this we need to add 'ec2-user' to docker group
+
+# Adding ec2-user to the docker group
+$ sudo usermod -aG docker ec2-user
+
+# Verify the docker installation
+$ docker info
+# You will not see 'command not found'. But you will see 'permission denied' or 'disabled'
+
+# To resolve the above issue
+$ exit
+$ exit
+
+Press R to restart the session
+
+# To see the docker version
+$ docker -v
+
+# To know the existing docker images
+$ docker images
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+****************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
