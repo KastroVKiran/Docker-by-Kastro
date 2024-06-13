@@ -6,6 +6,9 @@ Docker Playlist Link:https://www.youtube.com/playlist?list=PLs-PsDpuAuTeNx3OgGQ1
 
 AWS Tutorials Playlist Link: https://www.youtube.com/playlist?list=PLs-PsDpuAuTdOcZa-DDgG8KRbtMI_XRrC
 
+For technical discussions on DevOps, join the WhatsApp group, if interested
+https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+
 Feel free to share your opinions in the Comment section of the videos.
 
 Happy Learning!
