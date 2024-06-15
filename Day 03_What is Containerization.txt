@@ -1,0 +1,47 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 03
+***************
+
+What is Containerization?
+=========================
+Containerization is the packaging together of software code with all it’s necessary components like libraries, frameworks, and other dependencies so that they are isolated in their own "container."
+
+Containers are lightweight and can be quickly deployed, and they are also easy to scale up or down as needed. This Containerization enables the application to run quickly and reliably from one environment to another without the need to install and configure dependencies separately. 
+
+Containerization also makes deploying and scaling applications easy, as all the dependencies are packaged together. 
+
+How Does Containerization Work?
+============================
+Containerization is a technology that isolates applications in a shared computing environment, each operating within its own 'container'. These containers provide a distinct environment with dedicated resources and settings, ensuring applications are separated and function independently. Key points in the containerization process include:
+
+Application Isolation:
+Each application runs in a separate container, enabling multiple applications to coexist on the same server without interference.
+
+Containerization Platforms:
+Tools like Docker are used for containerization, offering capabilities for packaging, deploying, and managing applications. These platforms ensure resource and configuration isolation between containers.
+
+Creating a Container Image:
+To containerize an application, a software package known as an image is created, which includes the application's code, libraries, configurations, and dependencies.
+
+This image is stored in a registry (e.g., a Docker registry), either public or private.
+
+Deployment and Portability:
+The stored image can be deployed in any environment where the Docker platform is installed, facilitating consistent deployment across various settings.
+
+This uniformity ensures the application functions correctly regardless of the underlying system's specifics.
+
+Summary:
+Containerization streamlines and secures the deployment of applications, offering an efficient, conflict-free environment irrespective of the underlying hardware or software configurations.
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+****************************************************************************************************************************
+
+
+
