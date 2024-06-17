@@ -1,0 +1,62 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 04
+***************
+
+Docker architecture, terms and tools
+==============================
+Docker uses a client/server architecture. 
+The following is a breakdown of the core components associated with Docker, along with other Docker terms and tools.
+
+Docker host: A Docker host is a physical or virtual machine running Linux (or another Docker-Engine compatible OS).
+
+Docker Engine: Docker engine is a client/server application consisting of the Docker daemon, a Docker API that interacts with the daemon, and a command-line interface (CLI) that talks to the daemon. The software that hosts the containers is named Docker Engine
+
+Docker daemon: Docker daemon is a service that creates and manages Docker images, by using the commands from the client. Essentially the Docker daemon serves as the control center for Docker implementation.
+
+Docker client: The Docker client provides the CLI that accesses the Docker API (a REST API) to communicate with the Docker daemon over Unix sockets or a network interface. The client can be connected to a daemon remotely, or a developer can run the daemon and client on the same computer system.
+
+Docker objects: Docker objects are components of a Docker deployment that help package and distribute applications. They include images, containers, networks, volumes, plug-ins and more.
+
+Docker containers: Docker containers are the live, running instances of Docker images. While Docker images are read-only files, containers are live, ephemeral, executable content. Users can interact with them, and administrators can adjust their settings and conditions by using Docker commands. 
+
+Docker images: Docker images contain executable application source code and all the tools, libraries and dependencies the application code needs to run as a container. When a developer runs the Docker image, it becomes one instance (or multiple instances) of the container. 
+
+Building Docker images from scratch is possible, but most developers pull them down from common repositories. Developers can create multiple Docker images from a single base image and will share their stack's commonalities. 
+
+Docker images are made up of layers, and each layer corresponds to a version of the image. Whenever a developer makes changes to an image, a new top layer is created, and this top layer replaces the previous top layer as the current version of the image. Previous layers are saved for rollbacks or to be reused in other projects. 
+
+Each time a container is created from a Docker image, yet another new layer called the container layer is created. Changes made to the container—like adding or deleting files—are saved to the container layer, and these changes only exist while the container is running.
+
+This iterative image-creation process increases overall efficiency since multiple live container instances can run from a single base image. When they do so, they use a common stack. 
+
+Docker build: Docker build is a command that has tools and features for building Docker images.
+
+Dockerfile: Every Docker container starts with a simple text file containing instructions for how to build the Docker container image. Dockerfile automates the process of creating Docker images. It's essentially a list of CLI instructions that Docker Engine will run to assemble the image. The list of Docker commands is vast but standardized: Docker operations work the same regardless of contents, infrastructure or other environment variables. 
+
+Docker documentation: Docker documentation, or Docker docs, refers to the official Docker library of resources, manuals and guides for building containerized applications.
+
+Docker Hub: Docker Hub is the public repository of Docker images, calling itself the world's largest library and community for container images7. It holds over 100,000 container images sourced from commercial software vendors, open source projects and individual developers. Docker Hub includes images produced by Docker, Inc., certified images belonging to the Docker Trusted Registry and thousands of other images. 
+
+All Docker Hub users can share their images at will. They can also download predefined base images from the Docker filesystem as a starting point for any containerization project. 
+
+Other image repositories exist, including GitHub8. GitHub is a repository hosting service well known for application development tools and as a platform that fosters collaboration and communication. Users of Docker Hub can create a repository (repo) that can hold many images. The repository can be public or private and linked to GitHub or BitBucket accounts. 
+
+Docker Desktop: Docker Desktop is an application for Mac or Windows that includes Docker Engine, Docker CLI client, Docker Compose, Kubernetes and others. It also provides access to Docker Hub. 
+
+Docker registry: A Docker registry is a scalable, open-source storage and distribution system for Docker images. It enables developers to track image versions in repositories by using tagging for identification. This tracking and identification are accomplished by using Git, a version control tool. 
+
+Docker plug-ins: Developers use plug-ins to make Docker Engine even more functional. Several Docker plugins supporting authorization, volume and network are included in the Docker Engine plug-in system; third-party plug-ins can be loaded as well. 
+
+Docker extensions: Docker extensions enable developers to use third-party tools within Docker Desktop to extend its functions. Extensions for developer tools include Kubernetes app development, security, observability and more. 
+
+Docker Compose: Developers can use Docker Compose to manage multicontainer applications, where all containers run on the same Docker host. Docker Compose creates a YAML (.YML) file that specifies which services are included in the application and can deploy and run containers with a single command. Because YAML syntax is language-agnostic, YAML files can be used in programs written in Java, Python, Ruby and many other languages. 
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+****************************************************************************************************************************
+
