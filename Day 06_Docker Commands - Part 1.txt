@@ -1,0 +1,84 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 06
+***************
+# Once after you stop the instance and restart the same instance, docker will not work automatically.
+
+# To start the docker 
+$ sudo service docker start
+
+# To see the status of the docker
+$ sudo service docker status
+#In green colour you can see "Status (running)"
+
+# To see the version of the docker
+$ docker -v		-----> It will just show the docker version
+$ docker version	-----> It will show the complete details of the docker version
+$ docker info
+
+# Whenever we want to create a container, we need docker image. By default, we will not have any docker images. Docker images will be available in docker hub/registry.
+
+# To see the list of docker images
+$ docker images
+
+The backend process of getting the images:
+When we dont see any images, it meants docker client is not having any images. Now, docker client will search with docker host i.e docker daemon/engine. If daemon is having the images, it will display the images. If daemon is not having the images, then it will communicate with the docker hub/registry.
+
+# To search for a specific image
+$ docker search <ImageName>
+Ex: docker search amazonlinux
+
+# To pull/download the image
+$ docker pull <ImageName>
+Ex: docker pull amazonlinux
+
+# To see the list of docker images
+$ docker images
+#You will see the details of the image such as Image ID and Size.
+
+# To create and run the container
+$ docker run -it <ContainerName> <ImageName>
+Ex: docker run -it container001 amazonlinux
+
+# Once after executing the above command, you will see "bash-5.2#". It means you are currently inside the container.
+
+# To install a software inside the container
+$ yum install git
+
+# To verify whether git is installed inside the container or not
+$ git --version
+
+# To create a file inside the container
+$ touch <FileName>
+
+# To see the list of running containers
+$ docker ps
+
+# To stop a container
+$ docker stop <ContainerName>
+
+# To see list of both running and not running (stopped) containers
+$ docker ps -a
+
+# To restart the container
+$ docker start <ContainerName>
+
+# To kill a container
+$ docker kill <ContainerName>
+
+#Difference between the 'stop' and 'kill' of a container
+=> 'docker stop' will stop all the services inside the container. This is why we have a wait time when we execute 'docker stop'
+
+=> 'docker kill' will directly terminate the container. It will not wait till the containers are stopped. It will kill immediately.
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+			If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
