@@ -1,0 +1,74 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 08
+***************
+OS Level Virtualization
+======================
+=> It is the process of using the resources in an effective way.
+
+=> Hardware ---- Host OS ---- Hypervisor ---- VMs ----- Apps
+
+=> OS Level Virtualization means, for example, if I have an OS, inside the OS I have some folders, files, softwares, packages, code, etc., if I want to take the backup of complete OS, then it is known as OS Level Virtualization.
+
+# To delete a stopped container
+$ docker rm <ContainerName>
+
+# To delete all the containers in the stopped state
+$ docker container prune
+
+# To delete all the stopped cotnainers, unused images, and unused networks
+$ docker system prune -a
+
+# To delete a running container, firstly you have to stop the container;
+$ docker stop <ContainerName>
+$ docker rm <ContainerName>
+
+OS Level Virtualization
+=======================
+$ docker pull ubuntu									---> To pull the ubuntu image
+$ docker images										---> To see the list of images
+$ docker run -it --name <ContainerName> <ImageName>		---> To create and run the container at the same time
+Now you will be inside the 'ubuntu' container i.e container001 (in my case)
+$ apt update -y											---> To update the packages
+$ apt install git -y										---> To install git
+$ git --version											---> To verify the git installation
+$ apt install maven -y									---> To install maven
+$ mvn --version										---> To verify the maven installation
+
+Currently we have installed the git and maven s/w inside the container (container001).
+
+Inside the container we have the ubuntu image. Inside the ubuntu image, OS is there. Inside the ubuntu OS, I have installed git and maven s/w and also I have created 2 python and 2 java files.
+
+Lets copy the content from container to image;
+Inside the container we have ---> git s/w, maven s/w, 2 java files, and 2 python files.
+Now lets create the custom image using the container001.
+The name of the image i'm going to create is "KASTRO"
+The new image i.e "KASTRO" image container the content whatever thai is available in container001
+
+To copy the content from the container to image, we will use 'commit' command
+$ docker commit <ContainerName> <GiveCustomImageName>
+
+# To create a container from the custom image
+$ docker run -it --name <ContainerName> <ImageName>
+You will be inside the newly created container;
+Execute ls command to see the files
+Execute git --version and mvn --version to see the s/w
+
+If you are able to see everything then it is known as OS Level Virtualization (Complete Backup of OS)
+
+The process whatever we have done so far is not followed in the real-time scenarios. Because it is completely a manual process.
+
+In order to do the automation process, we have to create a dockerfile. Inside the dockerfile we are going to write/configure everything that we need to install. 
+
+The purpose of dockerfile is to do the image automation. This is done in real-time scenarios. 
+
+The automation in real-time is done by using dockerfile
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
