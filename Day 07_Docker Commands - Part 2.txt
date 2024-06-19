@@ -1,0 +1,54 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 07
+***************
+=> Docker Hub is a place where we store the docker images.
+
+=> Docker Hub is a public repository.
+
+=> Private repositories to store the images; Nexus, JFrog, ECR (Elastic Container Registry).
+
+# To pull the image
+$ docker pull <ImageName>
+Ex: docker pull helloworld
+
+# To run the image
+$ docker run <ImageName>
+
+# To remove any image
+$ docker rmi <ImageName> or <ImageID>
+
+# To remove an image which is being used by the (stopped/running) container
+$ docker rmi -f <ImageName> or <ImageID>
+
+# To run the image without pulling
+$ docker run <ImageName>
+
+# To rename a container
+$ docker rename <CurrentName> <NewName>
+
+# To go inside a specific container
+$ docker exec -it <ContainerName> /bin/bash
+
+# If the container stops immediately after creating, run the container interactive mode;
+$ docker run -it <ContainerName> <Command>
+
+# To start a container
+$ docker start <ContainerName> or <ContainerID>
+
+# To see the contents available inside a container
+Step 1: Start and Access the Container
+$ docker start <ContainerName>
+$ docker exec -it <ContainerName> <Command>
+
+Step 2: To list the softwares installed inside the container
+$ yum list installed
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
