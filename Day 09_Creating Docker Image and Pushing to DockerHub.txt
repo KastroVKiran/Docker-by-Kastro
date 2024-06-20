@@ -1,0 +1,69 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 09
+***************
+How to create a custom docker image by using a simple docker file?
+======================================================
+To create a docker image,we need a dockerfile. 
+To create a docker file, we need to use some docker commands.
+
+In order to push the custom image to the docker hub, we need to login to the docker hub in the browser.
+
+# To login to the docker hub using the mobaxterm/terminal
+$ docker login
+# Enter the username of dockerhub and password of dockerhub
+
+In this session, we are going to write a simple dockerfile with some commands inside it.
+Once we create the docker file, we are going to build the image.
+Once the docker image is ready, we can create the container.
+
+Docker image will act as OS.
+Docker container will act as App.
+
+How to write a dockerfile?
+======================
+=> The docker file that we are going to write should have the name as 'dockerfile'
+
+vi dockerfile
+
+FROM ubuntu
+RUN echo "This is Free Docker Course"
+RUN echo "by Kastro Kiran V"
+RUN echo "available on YouTube"
+CMD echo "This is my first docker file"
+CMD echo "Bye"
+RUN echo "Hello"
+
+esc ---> :wq
+
+Using the above dockerfile, we will create the docker image.
+In order to create the docker image by using dockerfile, we will use 'build' command.
+
+$ docker build -t <ImageName> .
+
+$ docker images ---> To verify the creation of docker image
+
+# To run the docker image
+$ docker run <ImageName>
+
+# Whenever we want to push the docker image to the docker hub, we first have to tag the docker image
+
+# To tag any docker image
+$ docker tag <ImageName> <DockerHubUserName>/<ImageName>
+
+# To push the docker image to the docker hub/registry
+$ docker push <DockerHubUserName>/<ImageName>
+
+
+# Goto Docker Hub and check for the image.
+
+# This image we can pull to any other VMs, and can run, and can create a container.
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
