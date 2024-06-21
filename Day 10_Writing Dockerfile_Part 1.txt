@@ -1,0 +1,101 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 10
+***************
+Writing a Dockerfile
+=======================
+=> Docker file is something that consists set of instructions to build a docker image.
+=> In docker file we will use Domain Specific Language (DSL) keywords.
+=> Docker engine will process the docker file instructions from top to bottom to build a docker image.
+Ex:
+FROM echo "Hi"
+FROM echo "Hello"
+FROM echo "Hai and Hello"
+=> First we will write a docker file. Using docker file we will create docker image. Using docker image we will create the docker container.
+
+Docker File ------> Docker Image -------> Docker Container
+
+=> The above process/workflow is a repititive process.
+
+=> Every docker file will start with FROM keyword.
+
+=> Docker file consists of DSL keywords.
+
+=> There are 14 main keywords that are available to write a docker file.
+
+=> The name of the docker file should be as 'Dockerfile' 
+=============================
+Docker File Keywords/Components
+=============================
+1. FROM
+---------------
+=> It indicates the base image to run our application.
+=> On top of base image, we will create our own images.
+=> FROM keyword is used to represent base image to create our own image.
+=> FROM keyword is the base image which is going to give the OS for our container.
+
+Syntax: FROM <ImageName>
+Ex: 
+FROM ubuntu 
+FROM mysql
+FROM amazonlinux
+FROM tomcat
+
+=> If required, we can configure morethan 1 base image
+=> Every new base image should be configured in a new line
+
+2. RUN 
+------------
+=> It is used to execute the commands 'while creating the docker image', on top of base image.
+=> RUN command instructions will execute while creating the image.
+
+Syntax: RUN <Command>
+Ex:
+RUN touch kastro.py
+RUN mkdir kastro
+RUN yum install git -y
+RUN git clone <Repo-URL>
+
+=> We can write multiple RUN instructions, these instructions will be processed by docker engine from TOP to BOTTOM.
+=> It can be used to install any packages, any commands.
+
+3. CMD
+-------------
+=> It is also used to execute the commands 'while creating the container'
+=> Here, image creation is one step and container creation is another step.
+=> To execute the instructions while creating the image, we will use RUN command.
+=> To execute the instructions while creating the container, we will use CMD command.
+=> Container creation is nothing but application execution.
+
+Note:
+We can write multiple RUN instructions. They will get executed from top to bottom.
+We can write multiple CMD instructions, but docker will process only the last CMD instruction. Hence, there is no use of writing multiple CMD instructions inside the docker file.
+
+vi Dockerfile
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install git -y
+RUN apt install maven -y
+
+Press escape ---> :wq ----> Lets execute/build the docker file. Whenever we write the components inside the dockerfile we need to build the file --->
+docker build -t <ImageName> ---> docker images ---> you will be able to see the custom image you've created ----> Lets create the container ---> docker run -it --name <ContainerName> <ImageNameWithTag>
+
+CMD Demo
+-----------------
+vi Dockerfile
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install git maven -y
+CMD apt install default-jre -y
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************

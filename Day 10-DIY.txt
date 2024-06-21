@@ -1,0 +1,16 @@
+Do(cker) It Yourself (DIY)
+----------------------------------------
+Day 10 Related Task
+----------------------------------------
+Write a Dockerfile to perform the below tasks;
+
+#Use Amazon-Linux as base image to perform the below tasks
+
+1. Create a directory with name "Netflix"
+2. Create a file with name "movies.txt" inside the "Netflix" directory
+3. Inside the "movies.txt" write the content as "This is movies file"
+4. Build the docker file
+5. Run the docker image
+6. Check the "Netflix" directory and the file inside it and the content inside the file.
+7. Come out of the container
+8. Go inside the container again, and recheck the directory, file, and content inside the file
