@@ -1,0 +1,92 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 12
+***************
+Writing a Dockerfile
+=======================
+WORKDIR
+-------------------
+=> Using this keyword we can set the working directory for an image or a container.
+=> It is used to go inside a desired folder
+=> Whatever the instructions we write in the docker file after WORKDIR command, all those instructions will be processed in the given working directory.
+
+Syntax: WORKDIR <Path>
+
+WORKDIR /tmp
+FROM ubuntu
+
+LABEL
+---------------
+=> It is used to assign the metadata for our image.
+=> Labels will represent data in the form of key-value pair
+
+	
+FROM ubuntu
+RUN apt update -y
+RUN apt install git maven -y
+COPY kastro.txt /tmp
+ADD https://dlcdn.apache.org/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz /tmp
+WORKDIR /tmp
+LABEL author KastroKiran
+
+---> escape ---> :wq ----> docker build -t <ImageName> . ----> docker images ---> docker run -it --name <ContainerName> <ImageName> ---> You will directly pointed to /tmp path. It is because we have given /tmp in the WORKDIR keyword.
+
+# To know the details of a specific container
+$ docker inspect <ContainerName> 
+
+# To know the author details of a specific container
+$ docker inspect <ContainerName> | grep -i author
+
+
+ENV
+------------
+=> It is used to set the environment variables
+=> The ENV variables will run inside a container
+=> ENV keyword is passed on the image
+Syntax: ENV <Key> <Value>
+Ex: ENV java /etc/jdk/
+
+ARGS
+-----------
+=> It is used to avoid the hardcoded values in the docker file
+=> These are the variables which runs outside of a container
+=> ARGS will be passed on a container
+
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install git maven -y
+COPY kastro.txt /tmp
+ADD https://dlcdn.apache.org/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz /tmp
+WORKDIR /tmp
+LABEL author KastroKiran
+ENV Software Python
+ENV ContainerPlatform Docker
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
