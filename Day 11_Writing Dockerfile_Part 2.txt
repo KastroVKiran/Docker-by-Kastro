@@ -1,0 +1,48 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 11
+***************
+Writing a Dockerfile
+=======================
+4. COPY
+--------------
+=> It is used to copy the files or folders to a docker image while creating the docker image.
+=> It is also used to copy the files from the source location to the destination location.
+=> It is used to copy the files available in the local system (VM) to the docker container.
+
+Syntax: COPY <SourceLocation> <DestinationLocation>
+
+5. ADD
+-----------
+=> It is also used to copy the files from source to destination location to the image while creating the image.
+
+COPY vs ADD
+=> ADD command can download the files from remote location (internet)
+=> ADD command is also used to download the s/w or files using the URL also
+=> COPY command will take the files from one location to another
+=> ADD keyword will extract tar files while copying to the image
+
+Syntax: ADD <URL to download> <DestinationLocation>
+
+vi Dockerfile ---> 
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install git maven -y
+COPY kastro.txt /tmp
+ADD https://dlcdn.apache.org/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz /tmp
+
+press esc ---> :wq ----> To execute/build/run the docker file ----> docker build -t <ImageName> .  ----> An error message will appear. Because, we dont have the kastro.txt file in my local. ----> So, first create the kastro.txt file ----> vi kastro.txt ----> Write some content inside the file ----> docker build -t <ImageName> . ----> docker images ----> You should see the newly created image ----> To create the container ----> docker run -it --name <ContainerName> <ImageName> ----> You will be inside the container ----> ls ----> But you will not be able to see the kastro.txt file and apache-maven.tar.gz file. The reason, by default whenever we are there inside the container, we will be in root directory, but the files are created in /tmp directory ----> cd /tmp ----> ls ----> You will see the kastro.txt and maven.tar.gz files.
+
+This means;
+we have used COPY command to copy the files from local (VM) to the container.
+we have used ADD command to add the files from remote location to the container.
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
