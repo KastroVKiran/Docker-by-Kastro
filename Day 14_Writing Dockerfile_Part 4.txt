@@ -1,0 +1,109 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 14
+***************
+Writing a Dockerfile
+=======================
+1. ENTRYPOINT
+2. USER
+3. EXPOSE
+4. VOLUME
+5. MAINTAINER
+
+ENTRYPOINT
+---------------------
+=> ENTRYPOINT instructions will be executed while the container.
+=> ENTRYPOINT instructions cannot be override. CMD instructions can be override.
+
+Syntax: ENTRYPOINT ["echo","This is Docker Basics to Brilliance Course"]
+
+vi Dockerfile ----> 
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install git maven -y
+COPY kastro.txt /tmp
+ADD https://dlcdn.apache.org/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz /tmp
+WORKDIR /tmp
+LABEL author KastroKiran
+ENV Software Python
+ENV ContainerPlatform Docker
+ENTRYPOINT ["echo","This is Docker Basics to Brilliance Course by Kastro"]
+
+----> esc ----> :wq ----> To build the image ----> docker build -f <Dockerfile Name> -t <ImageName> . ----> To verify the image ----> docker images ----> You should see the image created ----> To run the image ----> docker run <ImageName>
+
+
+USER
+---------
+=> We can set an username for an image or a container.
+
+Syntax: USER <UserName>
+
+Dockerfile
+------------------
+
+FROM python:3.9-slim #Official python image from the docker hub
+WORKDIR /app # Setting the working directory in the container
+COPY . .	# Copying the content from current working directory into the container at /app
+RUN useradd -m appuser #Creating an user with the name 'appuser'
+USER appuser #Switching to appuser
+CMD ["python", "app.py"] #Running the app.py file when the container launches
+
+Instead of running the dockerfile outside, I will create a specific directory and inside the directory i will create the dockerfile, and then i will build the docker image using the docker file, and then i will run the container.
+We also have to create 'app.py' file with some content inside it
+
+---> mkdir my-docker-app ---> cd my-docker-app ---> Create a docker file ---> vi Dockerfile ---> Paste the above docker file content ---> esc ---> :wq ---> vi app.py ---> print("This is docker basics to brilliance course by KASTRO") ---> esc ---> :wq ---> To build the image ---> docker build -t my-docker-app .  ---> docker images ---> To run the container ---> docker run --rm my-docker-app ---> You should see the content written inside the app.py file
+
+
+EXPOSE
+-----------------
+=> It represents on which port number our container is running
+
+Syntax: EXPOSE <PortNo.>
+
+VOLUME
+---------------
+=> It is used for data storage purposes or data mounting purposes.
+=> Docker Volumes
+=> If you want to store the data permanently then we will use Docker Volumes concept
+
+MAINTAINER
+-------------------------
+=> It represents the author/maintainer of docker file
+
+Syntax: MAINTAINER <AuthorName> <AuthorEmail>
+
+MAINTAINER Kastro kastro@gmail.com
+
+Keywords discussed so far
+----------------------------------------
+FROM
+MAINTAINER
+COPY
+ADD
+RUN
+CMD
+WORKDIR
+ENV
+LABEL
+ARGS
+ENTRYPOINT
+USER
+EXPOSE 
+VOLUME
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
