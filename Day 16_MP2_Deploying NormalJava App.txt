@@ -1,0 +1,123 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 16
+***************
+------------------------------------------------
+Dockerize Normal Java Application
+------------------------------------------------
+=> Types of applications that we can develop using JPL;
+		1. Without Springboot - Normal Java Applications - Legacy projects
+		2. With Springboot - JA with SpringBoot - Commonly used
+
+=> Docker file components will get changed based on the type of java application.
+
+=> Normal Java Applications will be packaged as a war file and then that war files will be deployed into the webserver (Tomcat, Apache, Nginx..)
+
+=> To package any Normal Java Applications we will use a build tool which is known as Maven - Compilation, Package
+
+=> Compilation ----> Conversion of .java file into .class file
+
+=> Packaging ----> Packaging of all the files as a single file (jar or war or ear)
+
+=> Standalone applications ---> jar (java archive)
+=> Web applications ---> war (web archive)
+
+=> For projects which are developed by using SpringBoot, we dont have to use the maven.
+
+Dockerfile
+---------------
+Tomcat server is required to dockerize the normal java application.
+
+Repo URL: https://github.com/KastroVKiran/maven-app-1.git
+
+# Use the official Tomcat base image
+FROM tomcat:9.0
+
+# Expose port 8080 to the outside world
+EXPOSE 8080
+
+# Copy the war file to the webapps directory of Tomcat
+COPY target/Kastro-app.war /usr/local/tomcat/webapps/
+
+Steps
+-----------------
+1. To install git;
+$ sudo yum install git -y
+
+2. To install maven (in order to package the code as a war file);
+$ sudo yum install maven -y
+
+3. Clone the repo;
+$ git clone https://github.com/KastroVKiran/maven-app-1.git
+
+4. Switch to the directory;
+$ cd <DirectoryName>
+
+5. To verify the files;
+$ ls -l
+
+6. Package the code using maven goals;
+$ mvn clean package
+
+7. To build the docker image;
+$ docker build -t <ImageName> .
+
+8. To run the image and do the port mapping;
+$ docker run -d -p 8080:8080 <ImageName>
+
+9. To access the application, go to new tab in browser;
+$ <PublicIPofVM>:8080/<WarFileName>/
+
+10. Ensure to open port number 8080, type as CustomTCP, Source: AnywhereIPv4 for the EC2 instance
+
+You will be able to see the Normal Java Application
+
+11. Similarly, to access the python application dockerized in the previous session;
+first, start the python related docker container (if it is stopped)
+$ docker start <ContainerID>
+
+12. Verify the container running status;
+$ docker ps
+
+13. To access the python application, go to new tab in browser;
+$ <PublicIPofVM>:5000/
+
+You will be able to see the Python application.
+
+So, this is how you can dockerize multiple containers in the same VM
+
+
+
+
+
+
+
+
+
+
+
+
+
+Access teh app:
+http://ec2-vm-publicip:8080/<War file Name>/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
