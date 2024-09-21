@@ -1,0 +1,57 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 17
+***************
+Docker Volumes
+-----------------------------
+Method 1: creation of docker volumes using Docker File
+
+FROM ubuntu
+VOLUME ["/volume1"]
+
+Steps:
+1. Created the docker file
+2. Build the docker file
+3. Verify for the image creation
+Inside the image the volume has got created. It is because we have mentioned in the dockerfile
+4. Using volume, create the container
+5. Verify for the volume
+6. Create files inside the volume
+
+Container1 --- Volume1 --- amazonprime1,2,3,4,5 files are available
+
+7. Share the volume1 from container1 to container2
+8. Verify for the volume1 in container2
+
+This is all about migrating the data from one container to the another container
+
+
+Method 2: Creation of docker volume using CLI
+ Create volume2 in container 3
+We will share the volume2 to container4
+
+Container 3 consists of Volume2
+Volume2 consists of 5 Netflix files
+
+I have to share the volume2 which is available in container3 to container4
+
+Container4 --- volume2 --- 5 Netflix files
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
