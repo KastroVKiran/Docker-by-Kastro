@@ -4,6 +4,8 @@ This course covers fundamentals to advanced concepts that are required inorder t
 
 Docker Playlist Link:https://www.youtube.com/playlist?list=PLs-PsDpuAuTeNx3OgGQ1QrpNBo-XE6VBh
 
+Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+
 AWS Tutorials Playlist Link: https://www.youtube.com/playlist?list=PLs-PsDpuAuTdOcZa-DDgG8KRbtMI_XRrC
 
 For technical discussions on DevOps, join the WhatsApp group, if interested
