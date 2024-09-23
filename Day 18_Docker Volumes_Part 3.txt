@@ -1,0 +1,63 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 18
+***************
+Docker Volumes
+-----------------------------
+Method 3: Using volume mounting concept we will see how to create a docker volume
+=> So far we have discussed how to create volumes inside a container. In this method, i will show how to create the volume outside of the container and then i will also show you how to attach the volume to the container
+
+To create a volume ---> docker volume create <Volume-Name>
+To see the list of volumes ---> docker volume ls
+To get the metadata/information of a volume ---> docker volume inspect <Volume-Name>
+
+docker run -it --name container5 --mount source=volume3,destination=/volume3 ubuntu
+
+Steps:
+Create Volume3
+Create files inside the volume
+Create a new container (Container5)
+Mount the volume3
+You will be inside the container
+Verify for the volume (ll/ls/ls -l)
+You will be able to see the volume3
+Go inside the volume3
+Verify for the files created.
+
+
+Method 1 (dockerfile) is preferred over Method2 (CLI) and Method3 (mount volume)
+Method 3 is preferred over Method 2
+
+Method 4: Moving the files from local to container
+
+1. Create files
+2. Create volume
+3. Attach to container
+4. Copy the files to the path
+
+To see the volume that is attached to a container ----> docker inspect <Container-Name>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
