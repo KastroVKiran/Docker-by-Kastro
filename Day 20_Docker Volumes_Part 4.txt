@@ -1,0 +1,49 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 19
+***************
+Docker Volumes
+-----------------------------
+=> Instead of mounting a volume, can we mount a directory in the host machine itself? YES
+=> EC2 --- Install Docker --- Directory
+
+mkdir: This stands for "make directory." It's the command used to create new directories.
+
+-p: This option tells mkdir to create parent directories as needed. If any of the specified directories in the path do not exist, it will create them. It won't throw an error if the directory already exists.
+
+/tmp/nginx/html: This is the path of the directory you want to create. In this case:
+
+	'/tmp' is a temporary directory commonly used for storing temporary files.
+	'nginx' is a subdirectory that will be created within /tmp.
+	'html' is another subdirectory that will be created within the nginx directory.
+
+1. By creating a docker volume
+2. By using mounted directories
+
+---------------------------------------------------------
+Stateless Containers Vs. Stateful Containers
+---------------------------------------------------------
+Once the container is deleted, whatever the data that is available inside the container will also gets deleted - Stateless Containers
+
+Even the container is deleted, the data inside the container will not get deleted - Stateful Containers
+
+Note: All the docker containers are stateless containers
+
+Note: To make a docker container as a stateful container, we have to use Docker Volumes concept.
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
