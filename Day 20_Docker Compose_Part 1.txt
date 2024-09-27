@@ -1,0 +1,115 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 20
+***************
+Docker Compose
+----------------------------
+=> For any application we have 3 major components;
+	1. Frontend
+	2. Backend
+	3. DB
+
+=> Application architecture
+	1Monolithic Architecture ---> Not preferred ---> The entire project will be available as a single unit
+	2. Micro service Architecture ---> Preferred
+
+=> Netflix ---> Movies, Animations, Webseries...
+=> Creating multiple containers manually is a complex and time taking process. 
+=> To simplify the creation of multiple containers for an application, we will use DOCKER COMPOSE concept
+
+=> Docker Compose is a tool which is used to manage multi container based applications.
+=> Using docker compose we can easily setup and deploy the multiple containers.
+=> In docker compose we will create a file which is known as "docker-compose" file
+=> The docker-compose file is having an extension as .yml or .yaml
+-----------------------------------------------
+Components of Docker-Compose file
+-----------------------------------------------
+1. version
+2. services
+3. network
+4. volumes
+
+
+docker-compose.yml
+
+we will store in the project repo
+
+-------------------------------------
+Docker compose commands
+-------------------------------------
+Create containers using docker compose
+$ docker-compose up
+
+Create containers using different filename
+$ docker-compose -f <FileName> up
+
+Run docker containers in detached mode
+$ docker-compose up -d
+
+Display the containers created by docker compose
+$ docker-compose ps
+
+List of docker images created by docker compose
+$ docker-compose images
+
+To check the container logs
+$ docker logs -f <ContainerName>
+
+To remove all the docker containers created by docker compose
+$ docker-compose down
+
+Default docker-compose file name
+docker-compose.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
