@@ -1,0 +1,252 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 21
+***************
+Docker-Compose Project-1
+-----------------------------------
+=> Netflix ---> Movies, Documentaries, Animations, Webseries....
+
+=> Launch Linux EC2 VM and connect to the instance
+=> Install Docker -----> sudo -i -----> yum install docker -y -----> 
+
+vim Dockerfile -----> 
+FROM ubuntu #Building a docker image with ubuntu
+RUN apt update -y #install packages
+RUN apt install apache2 -y #here im installing the apache server
+COPY index.html /var/www/html #here am copying the code from local to container
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"] #to control the apache server, we will use command line tool called 'apachectl' (-D means detached mode. And I want my service to be running on foreground)
+
+ -----> esc -----> :wq -----> 
+
+Lets say I need 'movies', 'documentaries', 'animations', 'webseries' services in my app -----> vim index.html -----> Copy the code provided at bottom of this document and paste -----> Change the heading as 'movies' -----> esc -----> :wq -----> Lets create an image -----> docker build -t movies:v1 . (Here 'movies:v1' is the image name) -----> Inside the movies i'm copying the code to container -----> Now we will get an image, in which 'movies' code is available -----> docker images -----> You can see the 'movies' image in which movies related code is available -----> docker run -itd --name movies -p 91:80 movies:v1 ('itd' means detached mode, 'movies' is container name, 'movies:v1' is the image name. To access container, im keeping -p. 91 is the container port no. 80 is the image port no. Image port number cannot be changed i.e httpd) -----> Copy the public ip of vm and paste in new tab:91 (Here 91 is the Port no of container -----> You will see the 'movies' services in our app.
+
+Lets create another service 'documentaries' Here I will use same docker file, and i will change only the code. -----> vim index.html -----> In the heading, replace the 'movies' with 'documentaries' -----> esc -----> :wq -----> Lets build the image -----> docker build -t documentaries:v1 . -----> docker images -----> You will see 'documentaries:v1' image -----> Inside the 'documentaries:v1' image we have train code -----> From the documentaries image we will build documentaries container -----> docker run -itd --name documentaries -p 92:80 documentaries:v1 (here 'documentaries' is the container name, 'documentaries:v1' is the image name) -----> copy the public ip and paste in newtab:92 -----> You will see the 'documentaries' service
+
+Process: Code ----> Build Dockerfile ----> Image ----> Container ----> Access the app
+
+Lets create another service 'animations' Here I will use same docker file, and i will change only the code. -----> vim index.html -----> In the heading, replace the 'documentaries' with 'animations' -----> esc -----> :wq -----> Lets build the image -----> docker build -t animations:v1 . -----> docker images -----> You will see 'animations:v1' image -----> Inside the 'animations:v1' image we have animations code -----> From the animations image we will build animations container -----> docker run -itd --name animations -p 93:80 animations:v1 (here 'animations' is the container name, 'animations:v1' is the image name) -----> copy the public ip and paste in newtab:93 -----> You will see the 'animations' service
+
+Lets create another service 'webseries' Here I will use same docker file, and i will change only the code. -----> vim index.html -----> In the heading, replace the 'animations' with 'webseries' -----> esc -----> :wq -----> Lets build the image -----> docker build -t webseries:v1 . -----> docker images -----> You will see 'webseries:v1' image -----> Inside the 'webseries:v1' image we have webseries code -----> From the webseries image we will build webseries container -----> docker run -itd --name webseries -p 94:80 webseries:v1 (here 'webseries' is the container name, 'webseries:v1' is the image name) -----> copy the public ip and paste in newtab:94 -----> You will see the 'webseries' service
+
+This is all a manual work. Here what we have done is I have created separate containers for each service. And we are able to access each service individually. But in real-time, when i open an app, I will be able to see all the services in a single page. For this we need to launch multiple containers at the same time, because all the services should be launched at a time. To automate the process, we will use DOCKER COMPOSE.
+
+=> Docker compose is a tool which is used to launch multiple containers together.
+=> We can create multiple containers on a single host.
+=> All of the services information we will write on a file known as 'Dockercompose' file.
+=> This file is in yml format. So the file extension will be .yml or .yaml
+=> We will use key-value pair also known as dictionary.
+
+Lets install dockercompose -----> Execute the below commands ----> 
+
+Download Docker Compose
+=> sudo curl -L "https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+Check the File. It should indicate that it's a binary file.
+=> file /usr/local/bin/docker-compose
+
+Set Executable Permissions
+=> sudo chmod +x /usr/local/bin/docker-compose
+
+Verify Installation
+=> docker-compose --version (You will see error here, follow the next commands)
+
+ls /usr/local/bin/
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+Give the permissions to execute the docker compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+To check docker-compose version
+docker-compose version
+
+Note: Whenever we download a package in file format, we need to move that file to bin folder. And, we need to give executable permission for that file to work as a command.
+
+Lets write the docker compose file for the first service ----> vim docker-compose.yml ----> 
+version: '3.8'
+services: 
+  movies:
+    image: movies:v1
+    ports:
+      - "91:80"
+  animies:
+    image: documentaries:v1
+    ports:
+      - "92:80"
+  docs:
+    image: animations:v1
+    ports:
+      - "93:80"
+  webseries:
+    image: webseries:v1
+    ports:
+      - "94:80"
+
+----> esc ----> :wq ----> docker-compose up -d (To run the docker-compose file in detached mode) ----> Error is seen because 'as already we have created the containers using port numbers 91,92,93, and 94, it is showing that error. So we either need to change the port numbers or remove the old containers. Lets remove all the containers  ----> docker kill $(docker ps -a -q) ----> docker rm $(docker ps -a -q) ----> docker ps -a  ----> You dont see any containers ----> docker-compose up -d ----> Access the public ip with ips as 91,92,93, and 94 in separate tabs.
+
+This is how we can manage all the containers at a time using docker-compose file.
+
+Lets delete the containers ----> docker-compose down ----> docker ps -a  ----> You cannot see any containers ----> If you want to create ----> docker-compose up -d ----> To stop the containers ----> docker-compose stop ----> To restart the containers ----> docker-compose start ----> To pause the containers ----> docker-compose pause ----> To unpause the containers ----> docker-compose unpause ----> docker ps -a
+
+docker-compose images ---- to get all the images managed by compose file
+docker-compose ps -a ---- to get all the containers managed by compose file
+docker-compose logs ---- To get the logs
+
+Scaling is to increase the strength of containers
+If you want to scale the containers ----> docker-compose scale movies=5 (here am scaling 'movies' containers to 5) ----> docker ps -a ----> But these newly created containers will not come up with port numbers. But using Dockerswarm we can do. In dockerswarm we will maintain multiple containers with same port number.
+
+To remove a service that is on stopped state ----> docker-compose rm movies
+To remove all services at a time ----> docker-compose rm
+docker-compose ps  ----> To get the services
+docker-compose top ----> to see the process running inside a container managed by docker-compose file
+
+_____________________________________________________________________________________________________________________
++++++++++++++++++++++++++++++"CONTENT FOR INDEX.HTML FILE"++++++++++++++++++++++++++++++++++++++++++++++
+_____________________________________________________________________________________________________________________
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Add Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f4/Netflix_Background_Image.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 10px solid red; /* Netflix-themed red border */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  background: red; /* Changed to Netflix red */
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid red; /* Changed to Netflix red */
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: red; /* Changed to Netflix red */
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+/* Styling for the Netflix logo */
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 150px;
+}
+
+/* Styling for the profile image */
+.profile-img {
+  display: block;
+  margin: 20px auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid red; /* Changed to Netflix red */
+}
+
+/* Centered the heading and applied a new font */
+h2 {
+  text-align: center;
+  font-size: 24px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* New "Movies" heading with a cursive font */
+h3 {
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  font-family: 'Pacifico', cursive; /* Beautiful cursive font */
+  margin-bottom: 30px;
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
+  border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<!-- Netflix Logo -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo" class="logo">
+
+<form action="/action_page.php">
+  <h2>Netflix - Kastro App</h2>
+  <h3>Movies</h3>
+  
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Username" name="usrnm">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email">
+  </div>
+  
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="psw">
+  </div>
+
+  <button type="submit" class="btn">Login</button>
+</form>
+
+<!-- Profile Image -->
+<img src="https://media.licdn.com/dms/image/v2/D5603AQHJB_lF1d9OSw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718971147172?e=1732752000&v=beta&t=9eISNqNp6VJfVhKLHaOjNDHI4-bwp1uk4c2GVbaxMQc" alt="Profile Image" class="profile-img">
+
+</body>
+</html>
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
+
