@@ -1,0 +1,401 @@
+											DOCKER - Basics to Brilliance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***************
+DAY 22
+***************
+Docker-Compose Project-2
+-----------------------------------
+=> App ---> FE, BE, DB
+=> Cricket App ---> NodeJS, npm, html, MySQL
+
+1. Launch instance (Amazon Linux) with the below user data to install Docker
+#! /bin/bash
+sudo -i
+yum install docker -y
+systemctl start docker
+
+2. Connect to the Instance
+
+3. Install Docker Compose
+Download Docker Compose
+=> sudo curl -L "https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+Check the File. It should indicate that it's a binary file.
+=> file /usr/local/bin/docker-compose
+
+ls /usr/local/bin/
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+Give the permissions to execute the docker compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+To check docker-compose version
+docker-compose version
+
+4. Create a directory
+$ cricket-app
+
+5. Go inside the directory
+
+6. Create the below files;
+Dockerfile,  app.js,  docker-compose.yml,  package.json, and create a directory called 'public'
+
+6.1. Keep the below content in the Dockerfile;
+# Use the official Node.js image
+FROM node:14
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the application source code
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "app.js"]
+
+6.2. Keep the below content in the app.js file;
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+
+const app = express();
+const port = 3000;
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// MySQL connection
+const db = mysql.createConnection({
+    host: 'db',
+    user: 'root',
+    password: 'kastro', // Updated password
+    database: 'cricket_db'
+});
+
+// Connect to MySQL
+db.connect(err => {
+    if (err) {
+        console.error('Database connection failed: ',  err);
+        return;
+    }
+    console.log('Connected to MySQL database');
+});
+
+// Serve static files
+app.use(express.static('public'));
+
+// Handle POST request
+app.post('/submit', (req, res) => {
+    const { cricketerName, countryName } = req.body;
+
+    console.log('Cricketer Name:', cricketerName);
+    console.log('Country Name:', countryName);
+
+    const sql = 'INSERT INTO cricketers (name, country) VALUES (?, ?)';
+    db.query(sql, [cricketerName, countryName], (err, result) => {
+        if (err) {
+            console.error('Error inserting data: ', err);
+            res.status(500).send('Error inserting data');
+            return;
+        }
+        console.log('Insert result:', result);
+        res.send('Congratulations, you have successfully deployed');
+    });
+});
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
+
+6.3. Keep the below content in the docker-compose.yml file;
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: kastro  # replace with your MySQL root password
+      MYSQL_DATABASE: cricket_db
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: your_password  # replace with your MySQL root password
+
+volumes:
+  db_data:
+
+6.4. Keep the below content in the package.json file;
+{
+  "name": "cricket-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "body-parser": "^1.19.0"
+  }
+}
+
+6.5. Inside the 'public' directory; create 'index.html' file. Keep the below content inside the index.html file;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is Kastro's Cricket Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Container div for adding border */
+        .page-border {
+            border: 5px solid #28a745; /* Green border */
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1000px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+        }
+
+        h1 span {
+            color: #ff5733; /* Orange color for KASTRO */
+            font-weight: bold;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        button i {
+            margin-right: 8px;
+        }
+
+        #responseMessage {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-top: 20px;
+            border: 2px solid #28a745;
+        }
+
+        .youtube-button {
+            background-color: #FF0000; /* YouTube red */
+        }
+
+        .youtube-button:hover {
+            background-color: #cc0000;
+        }
+
+        .linkedin-button {
+            background-color: #0077B5; /* LinkedIn blue */
+        }
+
+        .linkedin-button:hover {
+            background-color: #005582;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none; /* Remove underline */
+        }
+    </style>
+</head>
+<body>
+    <div class="page-border">
+        <h1>This is <span>KASTRO's</span> Cricket Application</h1>
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQHJB_lF1d9OSw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718971147172?e=1732752000&v=beta&t=9eISNqNp6VJfVhKLHaOjNDHI4-bwp1uk4c2GVbaxMQc" alt="Kastro's Profile">
+        
+        <form id="cricketerForm">
+            <label for="cricketerName">Enter Cricketer Name:</label>
+            <input type="text" id="cricketerName" name="cricketerName" required>
+            
+            <label for="countryName">Enter Country Name:</label>
+            <input type="text" id="countryName" name="countryName" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMessage"></p>
+
+        <div class="button-container">
+            <a href="https://youtube.com/playlist?list=PLs-PsDpuAuTeNx3OgGQ1QrpNBo-XE6VBh&si=8VPevPsXVRBFrmSU" target="_blank">
+                <button class="youtube-button"><i class="fab fa-youtube"></i> Docker - Basics to Brilliance</button>
+            </a>
+            <a href="https://www.linkedin.com/in/kastro-kiran/" target="_blank">
+                <button class="linkedin-button"><i class="fab fa-linkedin"></i> Connect with me</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('cricketerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const cricketerName = document.getElementById('cricketerName').value;
+            const countryName = document.getElementById('countryName').value;
+
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ cricketerName, countryName }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('responseMessage').innerText = data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+
+7. Run the docker-containers using docker-compose
+$ docker-compose up --build -d
+
+Open Port no. 3000 to access the application. 
+<Public IP of VM>:3000/
+You will be able to see the application
+
+Note: Dont insert any data through the application page, because we have created the tables in the database
+
+8. Connect to MySQL
+$ docker exec -it <db-container_name> mysql -u root -p
+
+9. Enter Your Password
+When prompted, enter the password you set in your docker-compose.yml (which is kastro).
+
+10. Select the Database
+Once you’re in the MySQL shell, you need to select the database you want to use. Run below commands:
+
+SHOW DATABASES;
+USE cricket_db;
+SHOW TABLES;
+
+11. Create the Table
+Now you can create the cricketers table by executing:
+$ CREATE TABLE cricketers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL
+);
+
+(If any error shows like 'table already exists' ignore the error)
+
+12. Verify the Table Creation
+$ SHOW TABLES;
+(Make sure the cricketers table exists in the cricket_db database.)
+
+13. After successfully creating the table, you can exit the MySQL shell by typing:
+EXIT
+
+14. Insert the data in the application page in browser
+
+15. To check the submitted data in your MySQL database, follow these steps:
+15.1. Access the MySQL Container
+$ docker exec -it <db-container_name> mysql -u root -p
+
+15.2. Log In to MySQL
+When prompted, enter your MySQL root password, which is Kastro
+
+15.3. Select the Database
+$ USE cricket_db;
+
+15.4. Query the Data
+Now, you can query the cricketers table to see the submitted data:
+$ SELECT * FROM cricketers;
+
+15.5. Review the Results
+This will display all the records in the cricketers table, allowing you to verify the submitted data.
+
+15.6. Exit MySQL
+After you finish checking the data, you can exit the MySQL prompt by typing:
+$ EXIT
+
+To see the docker-compose logs; 
+$ docker-compose logs db
+
+
+
+****************************************************************************************************************************
+															By 
+													KASTRO KIRAN V
+								Connect with me on LinkedIn: https://www.linkedin.com/in/kastro-kiran/
+		If interested, Join the WhatsApp group for technical discussions: https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm
+****************************************************************************************************************************
+
