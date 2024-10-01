@@ -1,4 +1,4 @@
-# ![Docker Logo](https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png) DOCKER - Basics to Brilliance Course by Kastro
+# DOCKER - Basics to Brilliance Course by Kastro
 
 ---
 
@@ -38,5 +38,5 @@ Stay committed, stay curious, and let’s build a strong DevOps foundation toget
 
 ### 🙋‍♂️ About Me
 
-![Kastro Profile Image](https://example.com/kastro-profile-circle.png)  
+<img src="https://media.licdn.com/dms/image/v2/D5603AQHJB_lF1d9OSw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718971147172?e=1733356800&v=beta&t=bz-SXs7FHwIDqQ9xlPibErrGvpHDdAjMJEr9WqHsi9A" alt="Kastro Profile Image" width="150" height="150" style="border-radius:50%;">  
 **KASTRO**
