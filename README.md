@@ -12,6 +12,7 @@ Welcome to the **DOCKER - Basics to Brilliance Course**! This course is designed
 
 - **Docker Playlist**: [Watch the Full Course](https://www.youtube.com/playlist?list=PLs-PsDpuAuTeNx3OgGQ1QrpNBo-XE6VBh)
 - **AWS Tutorials Playlist**: [Explore AWS Tutorials](https://www.youtube.com/playlist?list=PLs-PsDpuAuTdOcZa-DDgG8KRbtMI_XRrC)
+- **Nexus YouTube Video Link**: [*Click Here*](https://youtu.be/opJAfDOCZuI)
 
 ---
 
