@@ -1,7 +1,8 @@
 											DOCKER - Basics to Brilliance
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ***************
-DAY 06
+DAY 06 
+
 ***************
 # Once after you stop the instance and restart the same instance, docker will not work automatically.
 
