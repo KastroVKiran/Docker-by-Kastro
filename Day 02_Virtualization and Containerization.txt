@@ -3,7 +3,7 @@
 													             by
 													    Kastro Kiran V
 ========================================================================================================
-Need for Docker
+Need for Docker Platform
 -----------------------------
 => Once the project development is completed, developers are going to store the code into the github repo.
 => As a DevOps engineers, we need to deploy this app code into multiple virtual machines. These VMs are called as Environments.
